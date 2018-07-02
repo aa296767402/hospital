@@ -1,0 +1,98 @@
+{% extends 'common/base1.html' %}
+
+{% block title %}就诊{% endblock %}
+{% block content %}
+    {{ super() }}
+    <div>
+      <div class="panel-group" id="accordion" style="float: left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            我的坐诊
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('doctor.checkqueue') }}">挂号处理</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.queue') }}">现场挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.mypatient') }}">我的病人</a></div>
+{#                        #}
+                        <div class="panel-body"><a href="{{ url_for('doctor.history') }}">历史记录</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('doctor.profile') }}">我的信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.doctorinfo') }}">医生信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.message') }}">查看留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.messagehistory') }}">我的留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.change_mm') }}">修改密码</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            诊所库存
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('doctor.store') }}">库存信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div style="float: left;margin-top: 40px; margin-left: 80px;margin-right: 200px">
+            <form class="form-horizontal" style=" width: 500px">
+                {% for q in queue %}
+                <div class="form-group" style="width: 500px">
+                    <label class="col-sm-4 control-label">姓名：</label>
+                    <div class="col-sm-8">
+
+                        <p class="form-control-static">{{ q.name }}</p>
+                    </div>
+                </div>
+                <div class="form-group" style="width: 500px">
+                    <label class="col-sm-4 control-label">年龄：</label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static">{{ q.age }}</p>
+                    </div>
+                </div>
+                <div class="form-group" style="width: 500px">
+                    <label class="col-sm-4 control-label">描述：</label>
+                    <div class="col-sm-8">
+                        {% if q.desc %}
+                        <p class="form-control-static">{{ q.desc }}</p>
+                        {% else %}
+                        <p class="form-control-static">无</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </form>
+         <div style="width: 100%">{{ wtf.quick_form(form) }}</div>
+        </div>
+
+
+    </div>
+{% endblock %}
+

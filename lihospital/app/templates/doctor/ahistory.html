@@ -1,0 +1,43 @@
+{% extends 'common/base1.html' %}
+
+{% block title %}历史记录{% endblock %}
+{% block content %}
+    {{ super() }}
+    <div class="bs-example" data-example-id="bordered-table" style="float: left;margin-left: 80px; margin-top: 40px;margin-right: 60">
+        {#        <div>{{ wtf.quick_form(form) }}</div>#}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 60px">序号</th>
+                <th style="width: 80px">姓名</th>
+                <th style="width: 160px">手机</th>
+                <th style="width: 200px">描述</th>
+                <th>提交时间</th>
+                <th style="width: 60px">年龄</th>
+                <th  style="width: 200px">医生诊断</th>
+                <th style="width: 230px">治疗</th>
+
+            </tr>
+            </thead>
+            <tbody>
+{% for u in user %}
+            <tr>
+
+                    <th scope="row">{{ u.id }}</th>
+                    <td>{{ u.name }}</td>
+                    <td>{{ u.tel }}</td>
+                    <td>{{ u.desc }}</td>
+                    <td>{{ u.submit_time }}</td>
+                    <td>{{ u.age }}</td>
+                    <td>{{ u.doc_desc }}</td>
+                    <td>{{ u.treat }}</td>
+
+            </tr>
+{% endfor %}
+            </tbody>
+        </table>
+{#        <div>{{ wtf.quick_form(form) }}</div>#}
+    </div>
+    {##}
+    {#{{ wtf.quick_form(form) }}#}
+{% endblock %}

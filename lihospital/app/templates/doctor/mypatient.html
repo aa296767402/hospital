@@ -1,0 +1,49 @@
+{% extends 'common/base1.html' %}
+{% from 'common/macro.html' import pagination_show%}
+
+{% block title %}就诊处理{% endblock %}
+{% block content %}
+{{ super() }}
+
+ <div class="bs-example" data-example-id="bordered-table" style="float: left;margin-left: 80px; margin-top: 60px">
+{#     <div>{{ wtf.quick_form(form) }}</div>#}
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 60px">序号</th>
+                <th style="width: 80px">姓名</th>
+                <th style="width: 140px">手机</th>
+                <th style="width: 180px">描述</th>
+                <th>提交时间</th>
+                <th style="width: 60px">年龄</th>
+                <th  style="width: 180px">医生诊断</th>
+                <th style="width: 200px">治疗</th>
+{#                    <th>就诊</th>#}
+                    <th>删除</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for u in posts %}
+                    <tr>
+                        <th scope="row">{{ u.id }}</th>
+                        <td>{{ u.name }}</td>
+                        <td>{{ u.tel }}</td>
+                        <td>{{ u.desc }}</td>
+                        <td>{{ u.submit_time }}</td>
+                        <td>{{ u.age }}</td>
+                        <td>{{ u.doc_desc }}</td>
+                        <td>{{ u.treat }}</td>
+{#                        <td><a href="{{ url_for(endpoint1, id=u.id) }}">就诊</a></td>#}
+                        <td><a href="{{ url_for(endpoint2, id=u.id) }}" onClick=" return confirm('确认要删除?')">删除</a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+        </div>
+
+    <div style="margin-left: 200px; margin-top: 500px; position: absolute">
+        {{ pagination_show(queue, 'doctor.mypatient') }}</div>
+{#{{ wtf.quick_form(form) }}#}
+{% endblock %}

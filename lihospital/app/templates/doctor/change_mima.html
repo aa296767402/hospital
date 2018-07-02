@@ -1,0 +1,9 @@
+{% extends 'common/base1.html' %}
+{% block title %}重置密码{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div style="margin: 60px 400px">
+{#{{ super() }}#}
+{{ wtf.quick_form(form) }}</div>
+{% endblock %}

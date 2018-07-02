@@ -1,0 +1,9 @@
+{% extends 'common/baseadmin.html' %}
+
+{% block title %}库存添加{% endblock %}
+
+{% block page_content %}
+    <div style="margin: 60px 300px">
+    {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}

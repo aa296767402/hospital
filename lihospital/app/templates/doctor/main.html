@@ -1,0 +1,171 @@
+{{ moment.include_jquery() }}
+{{ moment.include_moment() }}
+{{ moment.locale('zh-CN') }}
+{% extends 'common/base1.html' %}
+
+{% block title %}首页-医生{% endblock %}
+{% block content %}
+{{ super() }}
+    <div>
+        <div class="panel-group" id="accordion" style="float: left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            我的坐诊
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('doctor.checkqueue') }}">挂号处理</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.queue') }}">现场挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.mypatient') }}">我的病人</a></div>
+{#                        #}
+                        <div class="panel-body"><a href="{{ url_for('doctor.history') }}">历史记录</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('doctor.profile') }}">我的信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.doctorinfo') }}">医生信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.message') }}">查看留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.messagehistory') }}">我的留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.change_mm') }}">修改密码</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            诊所库存
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('doctor.store') }}">库存信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('doctor.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+     <div id="ad-carousel" class="carousel slide" data-ride="carousel"
+             >
+            <ol class="carousel-indicators">
+                <li data-slide-to="0" class="active"></li>
+                <li data-slide-to="1"></li>
+                <li data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" style=" height: 350px; width: 600px">
+                <div class="item active" onclick="lun1()">
+                    {#    <img src="second_second_pic.png" alt="1 slide">#}
+                    {#       <img src="second_second_pic.png" alt="1 slide" />#}
+                    <img src="../../static/image/001.png" alt="1 slide" href="first_zixun.html"   style="height: 350px; width: 600px">
+                    <div class="container">
+                        <div class="carousel-caption">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item" onclick="lun2()">
+                    {#                    <img src="second_second_pic.png" alt="2 slide">#}
+                     <img src="../../static/image/002.jpg" alt="2 slide" style="height: 350px; width: 600px">
+                    <div class="container">
+                        <div class="carousel-caption">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item" onclick="lun3()">
+                    {#                    <a href="#"><img src="second_second_pic.png" alt="3 slide"></a>#}
+                     <img src="../../static/image/003.jpg" alt="1 slide"  style="height: 350px; width: 600px">
+                    <div class="container">
+                        <div class="carousel-caption">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#ad-carousel" data-slide="prev"><span
+                    class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#ad-carousel" data-slide="next"><span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+{#        <div>#}
+{#            {% for i in msg %}#}
+{#            <p>{{ i.user_name }}---{{ i.user_msg }}</p>#}
+{#            {% endfor %}#}
+{#        </div>#}
+
+
+     <div class="bs-example" data-example-id="bordered-table">
+            <div>今天是：{{ moment(t).format('LL') }}</div>
+            {#    {% if current_user %}#}
+            <table class="table table-bordered" style="text-align: center;width: 350px;">
+                  <thead>
+                <tr style="text-align: center;width: 100px;">
+                    <th>姓名</th>
+                    <th>留言</th>
+                    <th style="width: 60px;">回复</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for q in msg %}
+                    <tr style="text-align: center">
+                        <th scope="row">{{ q.user_name }}</th>
+                        <td>{{ q.user_msg }}</td>
+                        <td><a href="{{ url_for(endpoint, id=q.id) }}">回复</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+
+
+    </div>
+{#{% endblock %}#}
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.change').click(function () {
+                $(this).addClass('active').siblings().removeClass('active')
+            })
+
+        })
+
+        function lun1() {
+            window.location.href = "{{ url_for('others.first') }}"
+        }
+
+        function lun2() {
+            window.location.href = "{{ url_for('others.second') }}"
+        }
+
+        function lun3() {
+            window.location.href = "{{ url_for('others.third') }}"
+        }
+    </script>
+
+{% endblock scripts %}

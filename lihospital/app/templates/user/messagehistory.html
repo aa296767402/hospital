@@ -1,0 +1,96 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    {{ super() }}
+    <div>
+       <div class="panel-group" id="accordion" style="float: left;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.profile') }}">用户详情</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.change_mm') }}">修改密码</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.change_icon') }}">上传头像</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            我的挂号
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.doctorinfo') }}">医生信息</a></div>
+                         <div class="panel-body"><a href="{{ url_for('user.message') }}">医生留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.queue') }}">我要挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.myqueue') }}">历史查询</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            我的历史
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.history') }}">看病历史</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.mymessage') }}">留言历史</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.mydoc') }}">我的医生</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="float: left;margin-top: 40px; margin-left: 80px; width: 600px;">
+            <form class="form-horizontal" style="">
+                {% for i in msg %}
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">姓名：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">{{ i.user_name }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">我的留言：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">{{ i.user_msg }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">医生回复：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">{{ i.doc_msg }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">时间：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">{{ i.user_time }}</p>
+                        </div>
+                    </div>
+                    <button id="msgBtn" style="margin-left: 130px;margin-bottom: 30px"><a
+                            href="{{ url_for(endpoint2,id=i.id) }}">删除</a></button>
+                {% endfor %}
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

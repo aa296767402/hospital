@@ -1,0 +1,58 @@
+
+    <div>
+        <div class="panel-group" id="accordion" style="float: left">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            我的坐诊
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="#">挂号处理</a></div>
+                        <div class="panel-body"><a href="#">我的病人</a></div>
+                        <div class="panel-body"><a href="#">看病历史</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('admin.profile') }}">我的信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.change_mm') }}">修改密码</a></div>
+                        <div class="panel-body"><a href="#">修改邮箱</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            诊所库存
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="#">库存信息</a></div>
+                        <div class="panel-body"><a href="#">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

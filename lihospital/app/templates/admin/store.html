@@ -1,0 +1,103 @@
+{% extends 'common/baseadmin.html' %}
+{% from 'common/macro.html' import pagination_show%}
+{% block title %}库存信息{% endblock %}
+{% block content %}
+{#{% block content %}#}
+    {{ super() }}
+    <div>
+        <div class="panel-group" id="accordion" style="float: left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('admin.profile') }}">我的信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.change_mm') }}">修改密码</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.doctorinfo') }}">医生信息</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            我的诊所
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+{#                        <div class="panel-body"><a href="{{ url_for('admin.doctorinfo') }}">医生信息</a></div>#}
+                        <div class="panel-body"><a href="{{ url_for('admin.register') }}">添加医生</a></div><div class="panel-body"><a href="{{ url_for('admin.docrest') }}">医生休息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.checkqueue') }}">用户挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.doctreat') }}">病例查询</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            诊所库存
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('admin.store') }}">库存信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.addstores') }}">添加库存</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bs-example" data-example-id="bordered-table"
+             style="position: absolute;margin-left: 290px; margin-top: 40px">
+                <div>{{ wtf.quick_form(form) }}</div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    {#                    <th>序号</th>#}
+                   <th style="width: 60px">序号</th>
+                    <th style="width: 140px">名字</th>
+                    <th style="width: 80px">分类</th>
+                    <th style="width: 80px">规格</th>
+                    <th style="width: 180px">来源</th>
+                    <th style="width: 60px">数量</th>
+                    <th style="width: 150px" >放入时间</th>
+                    <th style="width: 60px">修改</th>
+                    <th style="width: 60px">删除</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for u in posts %}
+                    <tr>
+                        <th scope="row">{{ u.id }}</th>
+                        <td>{{ u.name }}</td>
+                        <td>{{ u.sort }}</td>
+                        <td>{{ u.guige }}</td>
+                        <td>{{ u.come_sourse }}</td>
+                        <td>{{ u.amount }}</td>
+                        <td>{{ u.input_time }}</td>
+                        <td><a href="{{ url_for(endpoint2, id=u.id) }} ">修改</a></td>
+                        <td><a href="{{ url_for(endpoint1, id=u.id) }} " onClick=" return confirm('确认删除该库存?')">删除</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+<div
+style = "margin-left: 400px; margin-top: 680px; position: absolute" >
+{{pagination_show(stores, 'admin.store')}} </div>
+
+    </div>
+{% endblock %}

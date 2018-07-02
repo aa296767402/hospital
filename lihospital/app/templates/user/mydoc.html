@@ -1,0 +1,97 @@
+{% extends 'common/base.html' %}
+
+{% block title %}我的医生{% endblock %}
+{% from 'common/macro.html' import pagination_show%}
+{% block content %}
+    {{ super() }}
+    <div>
+     <div class="panel-group" id="accordion" style="float: left;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.profile') }}">用户详情</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.change_mm') }}">修改密码</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.change_icon') }}">上传头像</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            我的挂号
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.doctorinfo') }}">医生信息</a></div>
+                         <div class="panel-body"><a href="{{ url_for('user.message') }}">医生留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.queue') }}">我要挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.myqueue') }}">历史查询</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            我的历史
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.history') }}">看病历史</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.mymessage') }}">留言历史</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.mydoc') }}">我的医生</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bs-example" data-example-id="bordered-table" style="float: left;margin-left: 50px; margin-top: 40px">
+          <div style="text-align: left; margin-bottom: 20px; width: 300px">{{ wtf.quick_form(form) }}</div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                     <th style="width: 80px">姓名</th>
+                    <th style="width: 60px">年龄</th>
+                    <th style="width: 140px">描述</th>
+                    <th style="width: 120px">挂号时间</th>
+                    <th style="width: 80px">医生</th>
+                    <th style="width: 120px">医生诊断</th>
+                    <th style="width: 120px">医生治疗</th>
+                </tr>
+                </thead>
+                <tbody>
+               {% for u in posts %}
+                    <tr>
+                        <th scope="row">{{ u.name }}</th>
+                        <td>{{ u.age }}</td>
+                        <td>{{ u.desc }}</td>
+                        <td>{{ u.submit_time }}</td>
+                        <td>{{ u.doctor_name }}</td>
+                        <td>{{ u.doc_desc }}</td>
+                        <td>{{ u.treat }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <div
+style = "margin-left: 350px; margin-top: 600px; position: absolute" >
+{{pagination_show(queue, 'user.mydoc')}} </div>
+    </div>
+{% endblock %}

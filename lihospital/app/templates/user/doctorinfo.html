@@ -1,0 +1,96 @@
+{% extends 'common/base.html' %}
+
+{% block title %}用户信息{% endblock %}
+{% block content %}
+
+    <div>
+       <div class="panel-group" id="accordion" style="float: left;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.profile') }}">用户详情</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.change_mm') }}">修改密码</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.change_icon') }}">上传头像</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            我的挂号
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.doctorinfo') }}">医生信息</a></div>
+                         <div class="panel-body"><a href="{{ url_for('user.message') }}">医生留言</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.queue') }}">我要挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.myqueue') }}">历史查询</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            我的历史
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('user.history') }}">看病历史</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.mymessage') }}">留言历史</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.mydoc') }}">我的医生</a></div>
+                        <div class="panel-body"><a href="{{ url_for('user.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bs-example" data-example-id="bordered-table" style="float: left;margin-left: 50px; margin-top: 40px">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+{#                    <th>序号</th>#}
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>研究方向</th>
+                    <th>个人简介</th>
+                    <th>是否休息</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for u in doctors %}
+                    <tr>
+                        <th scope="row">{{ u.name }}</th>
+                        <td>{{ u.age }}</td>
+                        <td>{{ u.dirc }}</td>
+                        <td>{{ u.intr }}</td>
+                        {% if u.is_rest==1 %}
+                            <td>是</td>
+                        {% else %}
+                            <td>否</td>
+                        {% endif %}
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'common/baseadmin.html' %}
+
+{% block title %}个人信息-管理员{% endblock %}
+{% block content %}
+    {{ super() }}
+    <div>
+        <div class="panel-group" id="accordion" style="float: left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            个人信息
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('admin.profile') }}">我的信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.change_mm') }}">修改密码</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.doctorinfo') }}">医生信息</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo">
+                            我的诊所
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+{#                        <div class="panel-body"><a href="{{ url_for('admin.doctorinfo') }}">医生信息</a></div>#}
+                        <div class="panel-body"><a href="{{ url_for('admin.register') }}">添加医生</a></div><div class="panel-body"><a href="{{ url_for('admin.docrest') }}">医生休息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.checkqueue') }}">用户挂号</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.doctreat') }}">病例查询</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree">
+                            诊所库存
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="panel-body"><a href="{{ url_for('admin.store') }}">库存信息</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.addstores') }}">添加库存</a></div>
+                        <div class="panel-body"><a href="{{ url_for('admin.help') }}">我要帮助</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float: left;margin-top: 40px; margin-left: 80px;margin-right: 200px">
+            <form class="form-horizontal" style="">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">姓名：</label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static">{{ session.get('username') }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email：</label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static">like296767402@163.com</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">医生：</label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static">本诊所一共 {{ nums }} 位医生</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">坐诊：</label>
+                    <div class="col-sm-8">
+                        <p class="form-control-static">今天有 {{ num }} 位医生坐诊</p>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+{% endblock %}

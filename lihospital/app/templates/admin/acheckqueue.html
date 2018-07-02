@@ -1,0 +1,45 @@
+{% extends 'common/baseadmin.html' %}
+{#{%from flask import make_response %}#}
+
+{% block title %}查看挂号{% endblock %}
+{% block content %}
+{{ super() }}
+
+ <div class="bs-example" data-example-id="bordered-table" style="float: left;margin-left: 80px; margin-top: 40px">
+{#     <div>{{ wtf.quick_form(form) }}</div>#}
+            <table class="table table-bordered" style="text-align: center">
+                <thead>
+                <tr>
+                    <th style="text-align: center">序号</th>
+                    <th style="text-align: center">姓名</th>
+                    <th style="text-align: center">手机</th>
+                    <th style="text-align: center">年龄</th>
+                    <th style="width: 200px;text-align: center">描述</th>
+                    <th style="text-align: center">提交时间</th>
+                    <th style="text-align: center">治疗医生</th>
+
+                    <th style="width: 200px;text-align: center">医生诊断</th>
+                    <th style="width: 200px;text-align: center">治疗</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for u in user %}
+                    <tr>
+                        <th scope="row">{{ u.id }}</th>
+                        <td>{{ u.name }}</td>
+                        <td>{{ u.tel }}</td>
+                        <td>{{ u.age }}</td>
+                        <td>{{ u.desc }}</td>
+                        <td>{{ u.submit_time }}</td>
+                        <td>{{ u.doctor_name }}</td>
+
+                        <td>{{ u.doc_desc }}</td>
+                        <td>{{ u.treat }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{##}
+{#{{ wtf.quick_form(form) }}#}
+{% endblock %}

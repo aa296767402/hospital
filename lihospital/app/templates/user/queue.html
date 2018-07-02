@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% block title %}挂号排队{% endblock %}
+
+{% block page_content %}
+
+    <div style="margin: 60px 300px">
+{#        <h3><b>选择医生：</b></h3>#}
+{#   <form role="form" action="/user/queue/" method="post" >#}
+{#            <div class="form-group">#}
+{##}
+{#                <select class="form-control" name="selectdoc">#}
+{##}
+{#                    {% for d in doc %}#}
+{#                        <option style="width: 300px;margin-left: 100px">{{ d.name }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#   </form>#}
+        {{ wtf.quick_form(form) }}
+    </div>
+
+{% endblock %}
